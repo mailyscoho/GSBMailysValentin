@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 /**
  *
  * @author vnicot
@@ -23,20 +22,28 @@ public class GSB_frais {
     }
     
     public static void main(String[] args) {
-        
-    }
-    
-    private void oui() {                                  
-        try {
+        try{
             String url = "jdbc:mysql://localhost/gsb_frais";
             String user = "util";
             String password = "1234";
             Connection connect = DriverManager.getConnection(url, user, password);
             Statement stmt = connect.createStatement();
-            ResultSet rs = stmt.executeQuery("");
+            ResultSet rs = stmt.executeQuery("SELECT id, libelle FROM etat");
+            while (rs.next()) {
+                String x = rs.getString("id");
+                String s = rs.getString("libelle");
+                System.out.println("cat_code: "+x+" cat_libelle: "+s);
+            }
+            
+            connect.close();
+            
         }
         catch (SQLException e) {
-        System.out.println (e.getMessage());
+            System.out.println (e.getMessage());
         }
     }
+    
+                                 
+        
+    
 }
